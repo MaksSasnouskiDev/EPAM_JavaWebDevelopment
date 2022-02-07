@@ -1,0 +1,46 @@
+<!--
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://logging.apache.org/log4j/2.0/events">
+
+    <appender name="fileAppender" class="org.apache.log4j.RollingFileAppender">
+        <param name="maxFileSize" value="10MB"/>
+        <param name="maxBackupIndex" value="2"/>
+        <param name="file" value="target/logfile_test.log"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy-MM-dd HH:mm:ss} %-5 %c{1} - %m%n"/>
+        </layout>
+    </appender>
+
+    <category name="prjct">
+        <priority value="all"/>
+        <appender-ref ref="fileAppender"/>
+    </category>
+
+</log4j:configuration>
+-->
+
+<!--<Configuration name="ConfigTest" status="ERROR" monitorInterval="5">
+    <Appenders>
+
+        <SystemPropertyArbiter propertyName="env" propertyValue="dev">
+            <Console name="Out">
+                <PatternLayout pattern="%m%n"/>
+            </Console>
+        </SystemPropertyArbiter>
+        <SystemPropertyArbiter propertyName="env" propertyValue="prod">
+            <List name="Out">
+            </List>
+        </SystemPropertyArbiter>
+
+    </Appenders>
+    <Loggers>
+        <Logger name="org.apache.test" level="trace" additivity="false">
+            <AppenderRef ref="Out"/>
+        </Logger>
+        <Root level="error">
+            <AppenderRef ref="Out"/>
+        </Root>
+    </Loggers>
+</Configuration>-->
