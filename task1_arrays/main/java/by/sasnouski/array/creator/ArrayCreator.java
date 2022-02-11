@@ -4,5 +4,8 @@ import by.sasnouski.array.entity.ArraysOfNumbers;
 import by.sasnouski.array.parser.StringParser;
 
 public class ArrayCreator {
-    ArraysOfNumbers allValidArrays = new ArraysOfNumbers(StringParser.createNumbersArray());
+
+    public static ArraysOfNumbers createArraysObject() {
+        return new ArraysOfNumbers(StringParser.createNumbersArray());
+    }
 }
