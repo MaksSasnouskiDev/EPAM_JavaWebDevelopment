@@ -1,0 +1,28 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="candies">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="producer" maxOccurs="unbounded" minOccurs="0">
+                    <xs:complexType mixed="true">
+                        <xs:sequence>
+                            <xs:element name="candy">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element type="xs:string" name="candyName" minOccurs="0"/>
+                                        <xs:element type="xs:string" name="name" minOccurs="0"/>
+                                        <xs:element type="xs:float" name="energy"/>
+                                        <xs:element type="xs:float" name="protein"/>
+                                        <xs:element type="xs:float" name="fats"/>
+                                        <xs:element type="xs:float" name="carbs"/>
+                                        <xs:element type="xs:string" name="producing-time"/>
+                                    </xs:sequence>
+                                    <xs:attribute type="xs:int" name="id" use="optional"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

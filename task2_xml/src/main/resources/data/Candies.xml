@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<candies>
+
+    <producer>name="Kamunarka"
+        <candy id="49137">
+            <candyName>Grillage</candyName>
+            <energy>550</energy>
+            <protein>8</protein>
+            <fats>40</fats>
+            <carbs>35</carbs>
+            <producing-time>25-11-2021</producing-time>
+        </candy>
+    </producer>
+    <producer>name="Kamunarka"
+        <candy id="48930">
+            <candyName>Karamel</candyName>
+            <energy>300</energy>
+            <protein>4.8</protein>
+            <fats>40</fats>
+            <carbs>35.8</carbs>
+            <producing-time>25-12-2021</producing-time>
+        </candy>
+    </producer>
+    <producer>name="Kamunarka"
+        <candy id="94729">
+            <candyName>Waffle</candyName>
+            <energy>563.9</energy>
+            <protein>8.3</protein>
+            <fats>62</fats>
+            <carbs>70.2</carbs>
+            <producing-time>25-11-2021</producing-time>
+        </candy>
+    </producer>
+    <producer>name="Kamunarka"
+        <candy id="91582">
+            <candyName>Karamel</candyName>
+            <energy>300</energy>
+            <protein>4.8</protein>
+            <fats>40</fats>
+            <carbs>35.8</carbs>
+            <producing-time>25-12-2021</producing-time>
+        </candy>
+    </producer>
+    <producer>name="Kamunarka"
+        <candy id="91548">
+            <candyName>Grillage</candyName>
+            <energy>550</energy>
+            <protein>8</protein>
+            <fats>40</fats>
+            <carbs>35</carbs>
+            <producing-time>25-11-2021</producing-time>
+        </candy>
+    </producer>
+
+    <producer>name="Kamunarka"
+        <candy id="47291">
+            <candyName>Fizz</candyName>
+            <energy>250</energy>
+            <protein>4.8</protein>
+            <fats>40</fats>
+            <carbs>35.8</carbs>
+            <producing-time>25-12-2021</producing-time>
+        </candy>
+    </producer>
+
+
+
+    <producer>name="Roshen"
+        <candy id="91639">
+            <name>StarsLine</name>
+            <energy>500</energy>
+            <protein>8</protein>
+            <fats>45.9</fats>
+            <carbs>35</carbs>
+            <producing-time>25-01-2022</producing-time>
+        </candy>
+    </producer>
+
+    <producer>name="Roshen"
+        <candy id="15285">
+            <name>Lollipop</name>
+            <energy>320</energy>
+            <protein>4.8</protein>
+            <fats>39.4</fats>
+            <carbs>35.8</carbs>
+            <producing-time>20-01-2022</producing-time>
+        </candy>
+    </producer>
+
+    <producer>name="Roshen"
+        <candy id="38109">
+            <name>Waffle</name>
+            <energy>320</energy>
+            <protein>19.7</protein>
+            <fats>39.4</fats>
+            <carbs>35.8</carbs>
+            <producing-time>20-01-2022</producing-time>
+        </candy>
+    </producer>
+    <producer>name="Roshen"
+        <candy id="57926">
+            <name>Fizz</name>
+            <energy>320</energy>
+            <protein>19.7</protein>
+            <fats>39.4</fats>
+            <carbs>35.8</carbs>
+            <producing-time>20-01-2022</producing-time>
+        </candy>
+    </producer>
+
+
+</candies>
