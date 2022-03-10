@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<candies xmlns="http://www.example.com/candies-instance"
+         schemaLocation="http://www.example.com/candies candies.xsd">
+
+    <chocolate_candy id="49137" >
+        <candy_name>Nut Grillage</candy_name>
+        <producer>Kamunarka</producer>
+        <energy>
+            <total>kcal="550"</total>
+            <protein>8</protein>
+            <fats>40</fats>
+            <carbs>35</carbs>
+        </energy>
+        <expiration>
+            <manufacturing_date>2021-11-25</manufacturing_date>
+            <expiration_date>2022-05-23</expiration_date>
+        </expiration>
+        <cocoa>28</cocoa>
+    </chocolate_candy>
+
+    <chocolate_candy id="83924" belarusian_producing="false">
+        <candy_name>Light Grillage</candy_name>
+        <producer>Roshen</producer>
+        <energy>
+            <total>kcal="460"</total>
+            <protein>12</protein>
+            <fats>43</fats>
+            <carbs>23</carbs>
+        </energy>
+        <expiration>
+            <manufacturing_date>2022-02-01</manufacturing_date>
+            <expiration_date>2022-08-01</expiration_date>
+        </expiration>
+        <cocoa>19</cocoa>
+    </chocolate_candy>
+
+    <caramel_candy id="91040">
+        <candy_name>Bim-Bom</candy_name>
+        <producer>Roshen</producer>
+        <energy>
+            <total>kcal="200"</total>
+            <protein>74</protein>
+            <fats>3</fats>
+            <carbs>85</carbs>
+        </energy>
+        <expiration>
+            <manufacturing_date>2022-02-01</manufacturing_date>
+            <expiration_date>2022-08-01</expiration_date>
+        </expiration>
+        <treacle>25</treacle>
+    </caramel_candy>
+
+    <caramel_candy id="83916">
+        <candy_name>Sweet Slice</candy_name>
+        <producer>Roshen</producer>
+        <energy>
+            <total>kcal="200"</total>
+            <protein>74</protein>
+            <fats>3</fats>
+            <carbs>85</carbs>
+        </energy>
+        <expiration>
+            <manufacturing_date>2022-02-01</manufacturing_date>
+            <expiration_date>2022-08-01</expiration_date>
+        </expiration>
+        <treacle>30</treacle>
+    </caramel_candy>
+
+    <waffle_candy id="73388" belarusian_producing="true">
+        <candy_name>Waffle Slice</candy_name>
+        <producer>Vitsba</producer>
+        <energy>
+            <total>kcal="430"</total>
+            <protein>74</protein>
+            <fats>34</fats>
+            <carbs>85</carbs>
+        </energy>
+        <expiration>
+            <manufacturing_date>2022-02-01</manufacturing_date>
+            <expiration_date>2022-08-01</expiration_date>
+        </expiration>
+        <cocoa>25</cocoa>
+
+    </waffle_candy>
+
+</candies>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.example.com/candies"
+        targetNamespace="http://www.example.com/candies"
+        elementFormDefault="qualified">
+
+    <element name="candies">
+        <complexType>
+            <sequence>
+                <element ref="candy" maxOccurs="unbounded"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="candy" type="candy_type" abstract="true"/>
+    <element name="chocolate_candy" substitutionGroup="candy"/>
+    <element name="caramel_candy" substitutionGroup="candy"/>
+    <element name="waffle_candy" substitutionGroup="candy"/>
+
+    <complexType name="candy_type">
+        <sequence>
+            <element name="candy_name" type="string"/>
+            <element name="producer" type="string"/>
+            <element name="energy" type="energy_type"/>
+            <element name="expiration">
+                <complexType>
+                    <sequence>
+                        <element name="manufacturing_date" type="date"/>
+                        <element name="expiration_date" type="date"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <any minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+
+        <attribute name="id" use="required">
+            <simpleType>
+                <restriction base="id">
+                    <length value="5"/>
+                </restriction>
+            </simpleType>
+        </attribute>
+        <attribute
+                name="belarusian_producing" type="boolean" use="optional" default="false">
+        </attribute>
+    </complexType>
+
+    <complexType name="energy_type">
+        <sequence>
+            <element name="total" type="decimal"/>
+            <element name="protein" type="decimal"/>
+            <element name="fats" type="decimal"/>
+            <element name="carbs" type="decimal"/>
+        </sequence>
+    </complexType>
+
+</schema>
