@@ -2,7 +2,7 @@ package by.sasnouski.task2xml.builder;
 
 import by.sasnouski.task2xml.entity.Candy;
 import by.sasnouski.task2xml.entity.CaramelCandy;
-import by.sasnouski.task2xml.entity.CocoaCandy;
+import by.sasnouski.task2xml.entity.ChocolateCandy;
 import by.sasnouski.task2xml.exception.CandyDataException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,14 +16,14 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.time.LocalDate;
 
-public class CandyDOMBuilder extends CandyBuilder{
-    static Logger logger = LogManager.getLogger();
+public class CandyDOMBuilder extends CandyBuilder {
+    private final Logger logger = LogManager.getLogger();
 
     private DocumentBuilder documentBuilder;
 
     public CandyDOMBuilder() {
-        super();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             documentBuilder = factory.newDocumentBuilder();
@@ -33,25 +33,27 @@ public class CandyDOMBuilder extends CandyBuilder{
     }
 
     @Override
-    public void buildCandySet(String xmlPath) throws CandyDataException {
+    public void buildCandy(String filePath) throws CandyDataException {
         Document document;
 
         try {
-            document = documentBuilder.parse(xmlPath);
+            document = documentBuilder.parse(filePath);
             Element root = document.getDocumentElement();
             NodeList candyItemList;
 
-            candyItemList = root.getElementsByTagName(CandyXMLTag.COCOA.toString());
+            candyItemList = root.getElementsByTagName(CandyXMLTag.CHOCOLATE_CANDY.
+                    toString().toLowerCase());
             for (int i = 0; i < candyItemList.getLength(); i++) {
                 Element candyElement = (Element) candyItemList.item(i);
-                Candy newCandy = buildCandySet(candyElement);
+                Candy newCandy = this.buildCandiesSet(candyElement);
                 candiesSet.add(newCandy);
             }
 
-            candyItemList = root.getElementsByTagName(CandyXMLTag.TREACLE.toString());
+            candyItemList = root.getElementsByTagName(CandyXMLTag.CARAMEL_CANDY.
+                    toString().toLowerCase());
             for (int i = 0; i < candyItemList.getLength(); i++) {
                 Element candyElement = (Element) candyItemList.item(i);
-                Candy newCandy = buildCandySet(candyElement);
+                Candy newCandy = this.buildCandiesSet(candyElement);
                 candiesSet.add(newCandy);
             }
         } catch (IOException | SAXException e) {
@@ -60,56 +62,65 @@ public class CandyDOMBuilder extends CandyBuilder{
         }
     }
 
-    private Candy buildCandy(Element candyElement) {
+    private Candy buildCandiesSet(Element candyElement) {
 
-            boolean isCocoaCandy = candyElement.getTagName().equals(CandyXMLTag.COCOA.toString());
-        Candy currentCandy = isCocoaCandy ? new CocoaCandy() : new CaramelCandy();
+        boolean isChocCandy = candyElement.getTagName().equals(CandyXMLTag.CHOCOLATE_CANDY.
+                toString().toLowerCase());
+        Candy currentCandy = isChocCandy ? new ChocolateCandy() : new CaramelCandy();
 
         String content;
 
-        content = candyElement.getAttribute(CandyXMLTag.ID.toString());
+        content = candyElement.getAttribute(CandyXMLTag.ID.toString().toLowerCase());
         currentCandy.setId(Integer.parseInt(content));
-        content = candyElement.getAttribute(CandyXMLTag.BELARUSIAN_PRODUCING.toString());
+        content = candyElement.getAttribute(CandyXMLTag.BELARUSIAN_PRODUCING.
+                toString().toLowerCase());
         if (!content.isBlank()) {
             currentCandy.setBelarusian_producing(Boolean.parseBoolean(content));
         } else {
-            currentCandy.setBelarusian_producing(currentCandy.isBelarusian_producing());
+            currentCandy.setBelarusian_producing(Candy.DEFAULT_BEL_PRODUCTION);
         }
 
-        content = getElementTextContent(candyElement, CandyXMLTag.CANDY_NAME.toString());
+        content = getElementTextContent(candyElement, CandyXMLTag.CANDY_NAME.toString().toLowerCase());
         currentCandy.setCandyName(content);
-        content = getElementTextContent(candyElement, CandyXMLTag.ENERGY.toString());
+
+        content = getElementTextContent(candyElement, CandyXMLTag.PRODUCER.toString().toLowerCase());
+        currentCandy.setProducer(content);
+
+        content = getElementTextContent(candyElement, CandyXMLTag.TOTAL.toString().toLowerCase());
         currentCandy.setTotalEnergy(Double.parseDouble(content));
-        content = getElementTextContent(candyElement, CandyXMLTag.PROTEIN.toString());
+
+        content = getElementTextContent(candyElement, CandyXMLTag.PROTEIN.toString().toLowerCase());
         currentCandy.setProtein(Double.parseDouble(content));
-        content = getElementTextContent(candyElement, CandyXMLTag.CARBS.toString());
+
+        content = getElementTextContent(candyElement, CandyXMLTag.FATS.toString().toLowerCase());
+        currentCandy.setFats(Double.parseDouble(content));
+
+        content = getElementTextContent(candyElement, CandyXMLTag.CARBS.toString().toLowerCase());
         currentCandy.setCarbs(Double.parseDouble(content));
-        content = getElementTextContent(candyElement, CandyXMLTag.MANUFACTURING_DATE.toString());
-        currentCandy.setManufacturingDate(content);
-        content = getElementTextContent(candyElement, CandyXMLTag.EXPIRATION_DATE.toString());
-        currentCandy.setExpirationDate(content);
 
+        content = getElementTextContent(candyElement, CandyXMLTag.MANUFACTURING_DATE.toString().toLowerCase());
+        currentCandy.setManufacturingDate(LocalDate.parse(content));
 
-        if(currentCandy instanceof CocoaCandy) {
-            CocoaCandy temp = (CocoaCandy) currentCandy;
-            content = getElementTextContent(candyElement, CandyXMLTag.COCOA.toString());
-            temp.setCocoa(Double.parseDouble(content));
+        content = getElementTextContent(candyElement, CandyXMLTag.EXPIRATION_DATE.toString().toLowerCase());
+        currentCandy.setExpirationDate(LocalDate.parse(content));
 
-            currentCandy = temp;
+        if (currentCandy instanceof ChocolateCandy chocCandy) {
+
+            content = getElementTextContent(candyElement, CandyXMLTag.CHOCOLATE_CANDY.toString().toLowerCase());
+            chocCandy.setCocoaAmount(Double.parseDouble(content));
+
         } else {
-            CaramelCandy temp = (CaramelCandy) currentCandy;
-            content = getElementTextContent(candyElement, CandyXMLTag.TREACLE.toString());
-            temp.setCaramel(Double.parseDouble(content));
-            currentCandy = temp;
+            CaramelCandy caramelCandy = (CaramelCandy) currentCandy;
+            content = getElementTextContent(candyElement, CandyXMLTag.CARAMEL_CANDY.toString().toLowerCase());
+            caramelCandy.setCaramelAmount(Double.parseDouble(content));
         }
         return currentCandy;
     }
 
     private static String getElementTextContent(Element element, String elementName) {
+
         NodeList nodeList = element.getElementsByTagName(elementName);
         Node node = nodeList.item(0);
-        String textContent = node.getTextContent();
-        return  textContent;
+        return node.getTextContent();
     }
-
 }

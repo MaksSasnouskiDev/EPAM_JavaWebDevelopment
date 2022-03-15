@@ -5,15 +5,18 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class CandyBuilderFactory {
-    static Logger logger = LogManager.getLogger();
+    private final Logger logger = LogManager.getLogger();
 
-    private enum TypeParser {
+    private static final CandyBuilderFactory instance = new CandyBuilderFactory();
+
+
+    public enum TypeParser {
         DOM, SAX, STAX
     }
     private CandyBuilderFactory() {}
 
-    public static CandyBuilder createBuilder(String typeParser) throws CandyDataException {
-        TypeParser type = TypeParser.valueOf(typeParser.toUpperCase());
+    public  CandyBuilder createBuilder(String typeParser) throws CandyDataException {
+        TypeParser type = TypeParser.valueOf(typeParser);
 
         switch (type) {
             case DOM -> {
@@ -27,7 +30,9 @@ public class CandyBuilderFactory {
             }
             default -> throw new CandyDataException ();
         }
-
+    }
+    public static CandyBuilderFactory getInstance() {
+        return instance;
     }
 
 }

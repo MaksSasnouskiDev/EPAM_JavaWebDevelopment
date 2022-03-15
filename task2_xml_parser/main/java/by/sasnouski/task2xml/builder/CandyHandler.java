@@ -2,29 +2,32 @@ package by.sasnouski.task2xml.builder;
 
 import by.sasnouski.task2xml.entity.Candy;
 import by.sasnouski.task2xml.entity.CaramelCandy;
-import by.sasnouski.task2xml.entity.CocoaCandy;
+import by.sasnouski.task2xml.entity.ChocolateCandy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
+import java.time.LocalDate;
 import java.util.*;
 
 import static by.sasnouski.task2xml.builder.CandyXMLTag.*;
 
 public class CandyHandler extends DefaultHandler {
 
-    static Logger logger = LogManager.getLogger();
+    private final Logger logger = LogManager.getLogger();
 
-    private Set<Candy> candiesSet;
+    private final String UNDERSCORE = "_";
+
+    private final Set<Candy> candiesSet;
     private Candy candyItem;
-    public EnumSet<CandyXMLTag> textXmlTag;
 
-    private CandyXMLTag currentXmlTag;
+    public EnumSet<CandyXMLTag> candyInnerTags;
+    private CandyXMLTag currentTag;
 
     public CandyHandler() {
-        candiesSet = new HashSet<Candy>();
-        textXmlTag = EnumSet.range(CANDY_NAME, CandyXMLTag.EXPIRATION);
+        candiesSet = new HashSet<>();
+        candyInnerTags = EnumSet.range(CHOCOLATE_CANDY, TREACLE);
     }
 
     public Set<Candy> getCandiesSet() {
@@ -33,64 +36,64 @@ public class CandyHandler extends DefaultHandler {
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) {
-        String tagCocoa = CandyXMLTag.COCOA.toString();
-        String tagTreacle = CandyXMLTag.TREACLE.toString();
-        String qNameRst = qName.toLowerCase().replace("_", "");
+        String tagChocolateCandy = CHOCOLATE_CANDY.toString();
+        String tagCaramelCandy = CARAMEL_CANDY.toString();
 
-        tagCocoa = tagCocoa.toLowerCase();
-        tagTreacle = tagTreacle.toLowerCase();
+        tagChocolateCandy = tagChocolateCandy.toLowerCase();
+        tagCaramelCandy = tagCaramelCandy.toLowerCase();
+        String localNameRst = localName.replace(UNDERSCORE, "").toLowerCase();
 
-        if (tagCocoa.equals(qNameRst) || tagTreacle.equals(qNameRst)) {
-            candyItem = tagCocoa.equals(qName) ? new CocoaCandy() : new CaramelCandy();
+
+        if (tagChocolateCandy.equals(localNameRst) || tagCaramelCandy.equals(localNameRst)) {
+            candyItem = tagChocolateCandy.equals(localNameRst) ? new ChocolateCandy() : new CaramelCandy();
             defineAttributes(attributes);
         } else {
-            CandyXMLTag temp = CandyXMLTag.valueOf(qName.toLowerCase().replace("_", ""));
-            if (textXmlTag.contains(temp)) {
-                currentXmlTag = temp;
+            CandyXMLTag actualTag = CandyXMLTag.valueOf(localName.toUpperCase().trim());
+            if (candyInnerTags.contains(actualTag)) {
+                currentTag = actualTag;
             }
         }
     }
-
-
     @Override
     public void endElement(String uri, String localName, String qName) {
-        String tagCocoa = CandyXMLTag.COCOA.toString();
-        String tagTreacle = CandyXMLTag.TREACLE.toString();
-        String qNameRst = qName.toLowerCase().replace("_", "");
+        String tagChocolateCandy = CHOCOLATE_CANDY.toString();
+        String tagCaramelCandy = CARAMEL_CANDY.toString();
+        tagChocolateCandy = tagChocolateCandy.toLowerCase();
+        tagCaramelCandy = tagCaramelCandy.toLowerCase();
 
-        if (tagCocoa.equals(qNameRst) || tagTreacle.equals(qNameRst)) {
+        if (tagChocolateCandy.equals(localName) || tagCaramelCandy.equals(localName)) {
             candiesSet.add(candyItem);
         }
     }
-
     @Override
     public void characters(char[] ch, int start, int length) {
-        String data = new String(ch, start, length).trim();
+        String elemValue = new String(ch, start, length).trim();
 
-        if (currentXmlTag != null) {
-            switch (currentXmlTag) {
-                case CANDY_NAME -> candyItem.setCandyName(data);
-                case PRODUCER -> candyItem.setProducer(data);
-                case TOTAL -> candyItem.setTotalEnergy(Double.parseDouble(data));
-                case PROTEIN -> candyItem.setProtein(Double.parseDouble(data));
-                case FATS -> candyItem.setFats(Double.parseDouble(data));
-                case CARBS -> candyItem.setCarbs(Double.parseDouble(data));
-                case MANUFACTURING_DATE -> candyItem.setManufacturingDate(data);
-                case EXPIRATION_DATE -> candyItem.setExpirationDate(data);
-                case COCOA -> candyItem.setCocoa(Double.parseDouble(data));
-                case TREACLE -> candyItem.setCaramel(Double.parseDouble(data));
+        if (currentTag != null) {
+            switch (currentTag) {
+                case CANDY_NAME -> candyItem.setCandyName(elemValue);
+                case PRODUCER -> candyItem.setProducer(elemValue);
+                case TOTAL -> candyItem.setTotalEnergy(Double.parseDouble(elemValue));
+                case PROTEIN -> candyItem.setProtein(Double.parseDouble(elemValue));
+                case FATS -> candyItem.setFats(Double.parseDouble(elemValue));
+                case CARBS -> candyItem.setCarbs(Double.parseDouble(elemValue));
+                case MANUFACTURING_DATE -> candyItem.setManufacturingDate(LocalDate.parse(elemValue));
+                case EXPIRATION_DATE -> candyItem.setExpirationDate(LocalDate.parse(elemValue));
+                case COCOA ->
+                    ((ChocolateCandy) candyItem).setCocoaAmount(Double.parseDouble(elemValue));
 
-                default -> throw new EnumConstantNotPresentException(currentXmlTag.getDeclaringClass(), currentXmlTag.name());
+                case TREACLE ->
+                        ((CaramelCandy) candyItem).setCaramelAmount(Double.parseDouble(elemValue));
             }
         }
-        currentXmlTag = null;
+        currentTag = null;
     }
 
     private void defineAttributes(Attributes attributes) {
-        String candyID = attributes.getValue(CandyXMLTag.ID.toString());
+        String candyID = attributes.getValue(ID.toString().toLowerCase());
         candyItem.setId(Integer.parseInt(candyID));
 
-        String isBelProduction = attributes.getValue(CandyXMLTag.ID.toString());
+        String isBelProduction = attributes.getValue(BELARUSIAN_PRODUCING.toString().toLowerCase());
         if (isBelProduction != null) {
             candyItem.setBelarusian_producing(Boolean.parseBoolean(isBelProduction));
         } else {

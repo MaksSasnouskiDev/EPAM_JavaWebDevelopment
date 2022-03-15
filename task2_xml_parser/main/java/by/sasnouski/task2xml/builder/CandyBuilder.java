@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public abstract class CandyBuilder {
+
     public Set<Candy> candiesSet;
 
     public CandyBuilder() {
@@ -23,7 +24,6 @@ public abstract class CandyBuilder {
         this.candiesSet = candiesSet;
     }
 
-    public abstract void buildCandySet(String xmlPath)
+    public abstract void buildCandy(String xmlPath)
             throws CandyDataException;
 }
-

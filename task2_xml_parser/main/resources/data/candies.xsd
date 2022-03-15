@@ -14,7 +14,6 @@
     <element name="candy" type="candy_type" abstract="true"/>
     <element name="chocolate_candy" substitutionGroup="candy"/>
     <element name="caramel_candy" substitutionGroup="candy"/>
-    <element name="waffle_candy" substitutionGroup="candy"/>
 
     <complexType name="candy_type">
         <sequence>
@@ -29,7 +28,9 @@
                     </sequence>
                 </complexType>
             </element>
-            <any minOccurs="0" maxOccurs="unbounded"/>
+            <element name="cocoaAmount" type="decimal" minOccurs="0"/>
+            <element name="treacle" type="decimal" minOccurs="0"/>
+
         </sequence>
 
         <attribute name="id" use="required">

@@ -15,7 +15,7 @@
             <manufacturing_date>2021-11-25</manufacturing_date>
             <expiration_date>2022-05-23</expiration_date>
         </expiration>
-        <cocoa>28</cocoa>
+        <cocoaAmount>28</cocoaAmount>
     </chocolate_candy>
 
     <chocolate_candy id="83924" belarusian_producing="false">
@@ -31,7 +31,7 @@
             <manufacturing_date>2022-02-01</manufacturing_date>
             <expiration_date>2022-08-01</expiration_date>
         </expiration>
-        <cocoa>19</cocoa>
+        <cocoaAmount>19</cocoaAmount>
     </chocolate_candy>
 
     <caramel_candy id="91040">
@@ -66,7 +66,7 @@
         <treacle>30</treacle>
     </caramel_candy>
 
-    <waffle_candy id="73388" belarusian_producing="true">
+    <chocolate_candy id="73388" belarusian_producing="true">
         <candy_name>Waffle Slice</candy_name>
         <producer>Vitsba</producer>
         <energy>
@@ -79,8 +79,7 @@
             <manufacturing_date>2022-02-01</manufacturing_date>
             <expiration_date>2022-08-01</expiration_date>
         </expiration>
-        <cocoa>25</cocoa>
-
-    </waffle_candy>
+        <cocoaAmount>25</cocoaAmount>
+    </chocolate_candy>
 
 </candies>

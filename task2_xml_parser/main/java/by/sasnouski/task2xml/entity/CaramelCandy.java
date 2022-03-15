@@ -1,23 +1,25 @@
 package by.sasnouski.task2xml.entity;
 
+import java.time.LocalDate;
+
 public class CaramelCandy extends Candy{
 
-    private double caramel;
+    private double caramelAmount;
 
     public CaramelCandy() {}
 
-    public CaramelCandy(int id, String candyName, String producer, String candyType, double totalEnergy, double protein,
-                        double fats, double carbs, String manufacturingDate, String expirationDate,boolean belarusian_producing,
-                        double caramel) {
-        super(id, candyName, producer, candyType, totalEnergy, protein, fats, carbs,
+    public CaramelCandy(int id, String candyName, String producer, double totalEnergy, double protein, double fats,
+                        double carbs, LocalDate manufacturingDate, LocalDate expirationDate,
+                        boolean belarusian_producing, double caramel) {
+        super(id, candyName, producer, totalEnergy, protein, fats, carbs,
                 manufacturingDate, expirationDate,belarusian_producing);
-        this.caramel=caramel;
+        this.caramelAmount =caramel;
     }
 
-    public double getCaramel() {
-        return caramel;
+    public double getCaramelAmount() {
+        return caramelAmount;
     }
-    public void setCaramel(double caramel) {
-        this.caramel = caramel;
+    public void setCaramelAmount(double caramelAmount) {
+        this.caramelAmount = caramelAmount;
     }
 }
