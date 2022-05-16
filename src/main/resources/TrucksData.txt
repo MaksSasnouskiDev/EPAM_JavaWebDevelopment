@@ -1,0 +1,15 @@
+id=1, truckTonnage=35, cargoWeight=26, isLoadedTruck=true, isFragileCargo=false;
+id=2, truckTonnage=20, cargoWeight=17, isLoadedTruck=true, isFragileCargo=true;
+id=3, truckTonnage=5, cargoWeight=5, isLoadedTruck=false, isFragileCargo=false;
+id=4, truckTonnage=10, cargoWeight=9, isLoadedTruck=true, isFragileCargo=false;
+id=5, truckTonnage=15, cargoWeight=14, isLoadedTruck=false, isFragileCargo=true;
+id=6, truckTonnage=15, cargoWeight=13, isLoadedTruck=true, isFragileCargo=false;
+id=7, truckTonnage=25, cargoWeight=24, isLoadedTruck=false, isFragileCargo=false;
+id=8, truckTonnage=35, cargoWeight=34, isLoadedTruck=true, isFragileCargo=true;
+id=9, truckTonnage=5, cargoWeight=5, isLoadedTruck=true, isFragileCargo=false;
+id=10, truckTonnage=25, cargoWeight=20, isLoadedTruck=true, isFragileCargo=false;
+id=11, truckTonnage=35, cargoWeight=33, isLoadedTruck=false, isFragileCargo=false;
+id=12, truckTonnage=10, cargoWeight=10, isLoadedTruck=true, isFragileCargo=true;
+id=13, truckTonnage=40, cargoWeight=37, isLoadedTruck=false, isFragileCargo=false;
+id=14, truckTonnage=35, cargoWeight=35, isLoadedTruck=true, isFragileCargo=false;
+
